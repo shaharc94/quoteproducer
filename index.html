@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מחולל הצעות מחיר</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- signature_pad נטענת כאן -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>מחולל הצעות מחיר</h1>
+    <div class="form-group">
+      <label>שם החברה: <input type="text" id="companyName" placeholder="הכנס שם חברה" required></label>
+      <label>איש קשר: <input type="text" id="contactName" placeholder="הכנס שם איש קשר" required></label>
+      <label>תפקיד: <input type="text" id="contactPosition" placeholder="הכנס תפקיד" required></label>
+    </div>
+    <div class="pricing-section">
+      <label>פרטי תמחור:</label>
+      <table id="pricingTable">
+        <thead>
+          <tr>
+            <th>רכיב</th>
+            <th>עלות</th>
+            <th>הערות</th>
+          </tr>
+        </thead>
+        <tbody id="products">
+          <!-- שורות תמחור יתוספו כאן -->
+        </tbody>
+      </table>
+      <button type="button" onclick="addProduct()">➕ הוסף רכיב</button>
+    </div>
+    <div class="payment-terms">
+      <label>תנאי תשלום: <textarea id="paymentTerms" rows="4" placeholder="הכנס תנאי תשלום"></textarea></label>
+    </div>
+    <!-- כפתור ליצירת ההצעה -->
+    <button type="button" onclick="generateHTML()">📄 צור הצעת מחיר</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
