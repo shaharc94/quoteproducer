@@ -21,7 +21,6 @@ function addProduct() {
 
 function generatePricingTableRowsForPdf() {
     const body = [];
-    // כותרת הטבלה
     body.push([
         { text: 'רכיב', style: 'tableHeader' },
         { text: 'עלות', style: 'tableHeader' },
@@ -37,10 +36,8 @@ function generatePricingTableRowsForPdf() {
     return body;
 }
 
-// exportPDF – פונקציה המייצאת את ההצעה כקובץ PDF
 async function exportPDF() {
     console.log("exportPDF called");
-    // טוענים את html2pdf אם אינה קיימת
     if (typeof html2pdf === 'undefined') {
         try {
             console.log("html2pdf not defined, loading script...");
@@ -51,9 +48,6 @@ async function exportPDF() {
             return;
         }
     }
-    
-    const btns = document.querySelectorAll('.signature-buttons.export');
-    btns.forEach(btn => btn.style.display = 'none');
     
     const opt = {
         margin: 0.5,
@@ -70,22 +64,41 @@ async function exportPDF() {
         }
     }).save().then(() => {
         console.log("PDF saved successfully");
-        btns.forEach(btn => btn.style.display = '');
     });
 }
 
-// דוגמה לשימוש ב-pdfmake (ניתן להשתמש בזה במקום exportPDF, ודאו שהספריות נטענות ב-index.html)
-function generatePDFWithPdfmake() {
+function generateHTML() {
     const companyName = document.getElementById('companyName').value;
     const contactName = document.getElementById('contactName').value;
     const contactPosition = document.getElementById('contactPosition').value;
     const paymentTerms = document.getElementById('paymentTerms').value;
-    const currentDate = new Date().toLocaleDateString('he-IL');
-    const proposalYear = new Date().getFullYear();
+    const pricingTable = document.getElementById('pricingTable').outerHTML;
 
-    const processText = 
-`1. התאמת התוכן – הלומדה תותאם בהתאם להערות שיסופקו (כולל שינויי טקסט, הוספת לוגו ושם הלקוח ${companyName}).
-2. שלב ראשון – הטמעת ההתאמות בלומדת המדף ותיקוף ראשוני.
-3. שלב שני – ביצוע תיקונים בהתאם למשוב, ולאחר מכן תיקוף סופי לקבלת אישור.
-4. קריינות (אופציונלי) – במידה ונדרש.
-5. תרגום (אופציונלי) – במידה ונד
+    const proposalHTML = `
+        <h1>הצעת מחיר עבור ${companyName}</h1>
+        <p>איש קשר: ${contactName}</p>
+        <p>תפקיד: ${contactPosition}</p>
+        ${pricingTable}
+        <h2>תנאי תשלום:</h2>
+        <p>${paymentTerms}</p>
+    `;
+
+    document.getElementById('proposal-container').innerHTML = proposalHTML;
+}
+
+let signaturePad;
+
+function initSignaturePad() {
+    const canvas = document.getElementById('signature-pad');
+    signaturePad = new SignaturePad(canvas);
+}
+
+function clearSignature() {
+    if (signaturePad) {
+        signaturePad.clear();
+    }
+}
+
+window.onload = function() {
+    initSignaturePad();
+};
