@@ -45,6 +45,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin: 5px;
 }
 
 button:hover {
@@ -65,4 +66,14 @@ table th, table td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+}
+
+.signature-section {
+    margin-top: 20px;
+}
+
+#signature-pad {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
 }
