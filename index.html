@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="proposal-container">
         <h1>מחולל הצעות מחיר</h1>
         <div class="form-group">
             <label>שם החברה: <input type="text" id="companyName" placeholder="הכנס שם חברה" required></label>
@@ -33,7 +33,13 @@
         <div class="payment-terms">
             <label>תנאי תשלום: <textarea id="paymentTerms" rows="4" placeholder="הכנס תנאי תשלום"></textarea></label>
         </div>
+        <div class="signature-section">
+            <label>חתימה:</label>
+            <canvas id="signature-pad" width="400" height="200"></canvas>
+            <button type="button" onclick="clearSignature()">נקה חתימה</button>
+        </div>
         <button type="button" onclick="generateHTML()">📄 צור הצעת מחיר</button>
+        <button type="button" onclick="exportPDF()">📥 ייצא ל-PDF</button>
     </div>
     <script src="script.js"></script>
 </body>
