@@ -309,4 +309,4 @@ function generateHTML() {
             font-size: 16px;
             margin: 10px 0;
         }
-      
+        .
